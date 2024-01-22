@@ -69,15 +69,39 @@ const source = document.querySelector("[data-source]");
 const image = images
   .map(
     (img) => `<li class="gallery-item">
-  <a class="gallery-link" href="large-image.jpg">
+  <a class="gallery-link" href="${img.original}">
     <img
       class="gallery-image"
-      src="small-image.jpg"
-      data-source="large-image.jpg"
-      alt="Image description"
+      src="${img.preview}"
+      data-source="${img.original}"
+      alt="${img.description}"
     />
   </a>
 </li>`
   )
   .join("");
+
 gallery.insertAdjacentHTML("beforeend", image);
+let instance;
+gallery.addEventListener("click", function selectImg(event) {
+  event.preventDefault();
+  const selectImg = event.target.dataset.source;
+  console.log(selectImg);
+  instance = basicLightbox.create(`<img src="${selectImg}">`);
+
+  instance.show();
+  document.addEventListener("keydown", handleKeyDown);
+});
+
+function handleKeyDown(event) {
+  if (event.key === "Escape") {
+    closeInstance();
+  }
+}
+
+function closeInstance() {
+  if (instance && instance.visible()) {
+    instance.close();
+    document.removeEventListener("keydown", handleKeyDown);
+  }
+}
