@@ -63,47 +63,47 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-const gallery = document.querySelector(".gallery");
-const galleryItem = document.querySelector(".gallery-item");
-const source = document.querySelector("[data-source]");
-const image = images
-  .map(
-    (img) =>
-      ` <li class="gallery-item">
-        <a class="gallery-link" href="${img.original}">
-          <img
-            class="gallery-image"
-            src="${img.preview}"
-            data-source="${img.original}"
-            alt="${img.description}"
-            
-          />
-        </a>
-      </li>`
-  )
-  .join("");
 
-gallery.insertAdjacentHTML("beforeend", image);
-let instance;
-gallery.addEventListener("click", function selectImg(event) {
+const imageGallery = document.querySelector(".gallery");
+let currentlightbox;
+imageGallery.addEventListener("click", (event) => {
   event.preventDefault();
-  const selectImg = event.target.dataset.source;
-  console.log(selectImg);
-  instance = basicLightbox.create(`<img src="${selectImg}">`);
 
-  instance.show();
-  document.addEventListener("keydown", handleKeyDown);
+  if (event.target.classList.contains("gallery-image")) {
+    const originalSource = event.target.dataset.source;
+    currentlightbox = basicLightbox.create(
+      `<img width="1400" height="900" src="${originalSource}">`
+    );
+
+    currentlightbox.show();
+    document.addEventListener("keydown", handleKeyDown);
+  }
 });
 
 function handleKeyDown(event) {
-  if (event.key === "Escape") {
-    closeInstance();
+  if (event.key === "Escape" || event.code === "Escape") {
+    closeCurrentlightbox();
   }
 }
 
-function closeInstance() {
-  if (instance && instance.visible()) {
-    instance.close();
+function closeCurrentlightbox() {
+  if (currentlightbox && currentlightbox.visible()) {
+    currentlightbox.close();
     document.removeEventListener("keydown", handleKeyDown);
   }
 }
+
+const galleryMarkup = images
+  .map(
+    ({ original, description, preview }) => `<li class="gallery-item">
+  <a class="gallery-link" href="${original}">
+  <img class = "gallery-image"
+  src="${preview}"
+  data-source="${original}"
+  alt=${description}/>
+  </a>
+  </li>`
+  )
+  .join("");
+
+imageGallery.innerHTML = galleryMarkup;
