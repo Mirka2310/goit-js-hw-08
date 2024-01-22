@@ -21,6 +21,8 @@ ul {
 }
 .gallery-image {
   flex-shrink: 0;
+  width: 360px;
+  height: 200px;
 }
 
 .gallery-image:hover {

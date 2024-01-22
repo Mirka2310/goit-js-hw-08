@@ -75,8 +75,6 @@ const image = images
             class="gallery-image"
             src="${img.preview}"
             data-source="${img.original}"
-            width="360px"
-            height="200px"
             alt="${img.description}"
             
           />
