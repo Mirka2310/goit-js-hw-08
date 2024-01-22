@@ -68,16 +68,20 @@ const galleryItem = document.querySelector(".gallery-item");
 const source = document.querySelector("[data-source]");
 const image = images
   .map(
-    (img) => `<li class="gallery-item">
-  <a class="gallery-link" href="${img.original}">
-    <img
-      class="gallery-image"
-      src="${img.preview}"
-      data-source="${img.original}"
-      alt="${img.description}"
-    />
-  </a>
-</li>`
+    (img) =>
+      ` <li class="gallery-item">
+        <a class="gallery-link" href="${img.original}">
+          <img
+            class="gallery-image"
+            src="${img.preview}"
+            data-source="${img.original}"
+            width="360px"
+            height="200px"
+            alt="${img.description}"
+            
+          />
+        </a>
+      </li>`
   )
   .join("");
 

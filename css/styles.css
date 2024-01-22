@@ -16,9 +16,10 @@ ul {
   gap: 24px;
   margin: 0;
 }
+.gallery-item {
+  cursor: pointer;
+}
 .gallery-image {
-  width: 360px;
-  height: 200px;
   flex-shrink: 0;
 }
 
