@@ -2,27 +2,24 @@ body {
   box-sizing: border-box;
   margin: 0 auto;
 }
-ul {
+
+li {
   list-style-type: none;
 }
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  padding-left: 156px;
-  padding-right: 156px;
-  justify-content: center;
   gap: 24px;
   margin: 0;
+  padding: 24px 156px;
+  justify-content: center;
 }
-.gallery-item {
-  cursor: pointer;
-}
+
 .gallery-image {
-  flex-shrink: 0;
   width: 360px;
   height: 200px;
+  flex-shrink: 0;
 }
 
 .gallery-image:hover {
